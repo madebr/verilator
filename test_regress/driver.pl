@@ -1415,6 +1415,7 @@ sub sc {
 sub have_sc {
     #my $self = shift;
     return 1 if (defined $ENV{SYSTEMC} || defined $ENV{SYSTEMC_INCLUDE});
+    return 1 if -e '/usr/include/systemc.h';  # apt-get install systemc
     return 0;
 }
 
