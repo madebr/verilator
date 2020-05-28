@@ -36,12 +36,13 @@ before_install:
   - sudo apt-get install libsystemc-dev || true
 
 before_script:
-  - dpkg -L gtkwave
+  - sudo dpkg -L libsystemc-dev || true
   - gcc -print-search-dirs || true
   - find / -ls | fgrep systemc.h || true
-  - bash -x ci/build_vcddiff.sh
-  - bash -x ci/build_verilator.sh
-  - bin/verilator -V || true
+  - g++ fast.cpp
+#  - bash -x ci/build_vcddiff.sh
+#  - bash -x ci/build_verilator.sh
+#  - bin/verilator -V || true
 
 after_script:
   - ccache -s
