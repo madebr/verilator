@@ -36,16 +36,9 @@ before_install:
   - sudo apt-get install libsystemc-dev || true
 
 before_script:
-  - sudo dpkg -L libsystemc-dev || true
-  - gcc -print-search-dirs || true
-  - find / -ls | fgrep systemc.h || true
-  - g++ -lsystemc fast.cpp
-  - autoconf
-  - ./configure
-  - cat src/config_build.h
-#  - bash -x ci/build_vcddiff.sh
-#  - bash -x ci/build_verilator.sh
-#  - bin/verilator -V || true
+  - bash -x ci/build_vcddiff.sh
+  - bash -x ci/build_verilator.sh
+  - bin/verilator -V || true
 
 after_script:
   - ccache -s
@@ -70,30 +63,30 @@ jobs:
       compiler: gcc
       script: echo "Done building Verilator"
 # Non-cron build will just run on whatever linux flavor we get
-#    - if: type != cron
-#      stage: test
-#      name: "Test Dist"
-#      dist: focal
-#      compiler: gcc
-#      script: ci/test.sh dist
-#    - if: type != cron
-#      stage: test
-#      name: "Test Vlt"
-#      dist: focal
-#      compiler: gcc
-#      script: ci/test.sh vlt
-#    - if: type != cron
-#      stage: test
-#      name: "Test Vltmt set 0"
-#      dist: focal
-#      compiler: gcc
-#      script: ci/test.sh vltmt0
-#    - if: type != cron
-#      stage: test
-#      name: "Test Vltmt set 1"
-#      dist: focal
-#      compiler: gcc
-#      script: ci/test.sh vltmt1
+    - if: type != cron
+      stage: test
+      name: "Test Dist"
+      dist: focal
+      compiler: gcc
+      script: ci/test.sh dist
+    - if: type != cron
+      stage: test
+      name: "Test Vlt"
+      dist: focal
+      compiler: gcc
+      script: ci/test.sh vlt
+    - if: type != cron
+      stage: test
+      name: "Test Vltmt set 0"
+      dist: focal
+      compiler: gcc
+      script: ci/test.sh vltmt0
+    - if: type != cron
+      stage: test
+      name: "Test Vltmt set 1"
+      dist: focal
+      compiler: gcc
+      script: ci/test.sh vltmt1
 # Cron builds try different OS/compiler combinations
     - if: type = cron
       dist: trusty
