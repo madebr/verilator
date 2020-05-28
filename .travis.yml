@@ -39,7 +39,10 @@ before_script:
   - sudo dpkg -L libsystemc-dev || true
   - gcc -print-search-dirs || true
   - find / -ls | fgrep systemc.h || true
-  - g++ fast.cpp
+  - g++ -lsystemc fast.cpp
+  - autoconf
+  - ./configure
+  - cat src/config_build.h
 #  - bash -x ci/build_vcddiff.sh
 #  - bash -x ci/build_verilator.sh
 #  - bin/verilator -V || true
