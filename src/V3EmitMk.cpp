@@ -160,6 +160,13 @@ public:
         of.puts("# SystemC library directory with libsystemc.a (from $SYSTEMC_LIBDIR)\n");
         of.puts(string("SYSTEMC_LIBDIR ?= ") + V3Options::getenvSYSTEMC_LIBDIR() + "\n");
 
+        // Only check it if we really need the value
+        if (v3Global.opt.usingSystemCLibs() && !V3Options::systemCFound()) {
+            v3fatal("Need $SYSTEMC_INCLUDE in environment or when Verilator configured,\n"
+                    "and need $SYSTEMC_LIBDIR in environment or when Verilator configured\n"
+                    "Probably System-C isn't installed, see http://www.systemc.org\n");
+        }
+
         of.puts("\n### Switches...\n");
         of.puts("# SystemC output mode?  0/1 (from --sc)\n");
         of.puts(string("VM_SC = ") + ((v3Global.opt.systemC()) ? "1" : "0") + "\n");

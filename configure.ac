@@ -128,6 +128,12 @@ AC_ARG_ENABLE([prec11],
 AC_SUBST(CFG_WITH_PREC11)
 AC_MSG_RESULT($CFG_WITH_PREC11)
 
+# HAVE_SYSTEMC
+# - If found the default search path has it, so support is always enabled.
+# - If not found or not system-wide, user can set SYSTEMC_INCLUDE.
+AC_CHECK_HEADERS([systemc.h])
+AC_SUBST(HAVE_SYSTEMC_H)
+
 # Compiler flags
 CFLAGS+=" -I${includedir}"
 CPPFLAGS+=" -I${includedir}"
