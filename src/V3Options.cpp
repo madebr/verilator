@@ -1513,7 +1513,7 @@ void V3Options::showVersion(bool verbose) {
     cout << "    SYSTEMC_INCLUDE    = " << DEFENV_SYSTEMC_INCLUDE << endl;
     cout << "    SYSTEMC_LIBDIR     = " << DEFENV_SYSTEMC_LIBDIR << endl;
     cout << "    VERILATOR_ROOT     = " << DEFENV_VERILATOR_ROOT << endl;
-    cout << "    SystemC-System-Wide = " << cvtToStr(systemCSystemWide()) << endl;
+    cout << "    SystemC system-wide = " << cvtToStr(systemCSystemWide()) << endl;
 
     cout << endl;
     cout << "Environment:\n";
@@ -1529,7 +1529,7 @@ void V3Options::showVersion(bool verbose) {
 
     cout << endl;
     cout << "Features (based on environment or compiled-in support):\n";
-    cout << "    SystemC Found      = " << cvtToStr(systemCFound()) << endl;
+    cout << "    SystemC found      = " << cvtToStr(systemCFound()) << endl;
 }
 
 //======================================================================
