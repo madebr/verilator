@@ -128,12 +128,6 @@ AC_ARG_ENABLE([prec11],
 AC_SUBST(CFG_WITH_PREC11)
 AC_MSG_RESULT($CFG_WITH_PREC11)
 
-# HAVE_SYSTEMC
-# - If found the default search path has it, so support is always enabled.
-# - If not found or not system-wide, user can set SYSTEMC_INCLUDE.
-AC_CHECK_HEADERS([systemc.h])
-AC_SUBST(HAVE_SYSTEMC_H)
-
 # Compiler flags
 CFLAGS+=" -I${includedir}"
 CPPFLAGS+=" -I${includedir}"
@@ -447,6 +441,13 @@ fi
 AC_CHECK_MEMBER([struct stat.st_mtim.tv_nsec],
     [AC_DEFINE([HAVE_STAT_NSEC],[1],[Defined if struct stat has st_mtim.tv_nsec])],
     [], [#include <sys/stat.h>])
+
+# HAVE_SYSTEMC
+# - If found the default search path has it, so support is always enabled.
+# - If not found or not system-wide, user can set SYSTEMC_INCLUDE.
+# AC_CHECK_HEADERS fails for this
+AC_CHECK_HEADERS([systemc.h])
+AC_SUBST(HAVE_SYSTEMC_H)
 
 # Checks for system services
 
