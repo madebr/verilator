@@ -445,8 +445,15 @@ AC_CHECK_MEMBER([struct stat.st_mtim.tv_nsec],
 # HAVE_SYSTEMC
 # - If found the default search path has it, so support is always enabled.
 # - If not found or not system-wide, user can set SYSTEMC_INCLUDE.
-# AC_CHECK_HEADERS fails for this
-AC_CHECK_HEADERS([systemc.h])
+# AC_CHECK_HEADERS seems to not locate on Travis-CI but include does work.
+AC_MSG_CHECKING([whether SystemC is found (in system path)])
+AC_COMPILE_IFELSE(
+    [AC_LANG_PROGRAM([[#include <systemc.h>
+                     ]],[])],
+    [_my_result=yes
+     AC_DEFINE([HAVE_SYSTEMC_H],[1],[Defined if have systemc.h])],
+    [_my_result=no])
+AC_MSG_RESULT($_my_result)
 AC_SUBST(HAVE_SYSTEMC_H)
 
 # Checks for system services
